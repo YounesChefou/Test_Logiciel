@@ -13,12 +13,17 @@ class TestQuickToolsMethods(unittest.TestCase):
         tool.delete_db(self.db_path)
 
     def test_add_room(self):
-        add_room(self.db_path,'room0','public')
-        self.assertEqual(tool.get_rooms(self.db_path), ['room0']))
+        tool.add_room(self.db_path,'room0','public')
+        self.assertEqual(tool.get_rooms(self.db_path), ['room0'])
+
+    def test_add_multiple_rooms(self):
+        tool.add_room(self.db_path,'room0','public')
+        tool.add_room(self.db_path,'room1','public')
+        self.assertEqual(tool.get_rooms(self.db_path), ['room0','room1'])
 
     def test_add_user(self):
-        add_user('quick_chat.db','yann.c',0,0,'password')
-        self.assertEqual(tool.get_rooms(self.db_path), )
+        tool.add_user(self.db_path,'yann.c',0,0,'password')
+        self.assertEqual(tool.get_users(self.db_path),['yann.c'] )
 
     # def test_get_rooms(self):
     #
@@ -41,3 +46,4 @@ class TestQuickToolsMethods(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
