@@ -6,11 +6,17 @@ class TestQuickToolsMethods(unittest.TestCase):
     def setUp(self):
         #Creation de BDD
         self.db_path = 'test_chat.db'
+        self.connect = sqlite3.connect(self.db_path)
+        self.cursor = self.connect.cursor()
         tool.create_db(self.db_path)
 
     def tearDown(self):
         #Suppression de BDD
         tool.delete_db(self.db_path)
+
+    def test_get_rooms(self):
+        sql = 'SELECT * FROM Rooms;'
+        self.assertEqual(tool.get_rooms(self.db_path), self.cursor.execute(sql).fetchall())
 
     def test_add_room(self):
         tool.add_room(self.db_path,'room0','public')
@@ -46,4 +52,3 @@ class TestQuickToolsMethods(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
