@@ -14,6 +14,9 @@ def get_rooms(db_path):
 
 
 def add_room(db_path, room_name, room_type):
+	if (isinstance(room_name, str) == False):
+		raise Exception('room_name doit être sous la forme de string');
+
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
 

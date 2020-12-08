@@ -13,8 +13,16 @@ class TestQuickToolsMethods(unittest.TestCase):
         tool.delete_db(self.db_path)
 
     def test_add_room(self):
+        #python peut raise des exceptions :
+        # https://ongspxm.gitlab.io/blog/2016/11/assertraises-testing-for-errors-in-unittest/
+        # ici ça peut etre utile de verifier que les arguments passés sont bien des string
         tool.add_room(self.db_path,'room0','public')
+        tool.add_room(self.db_path,0,'public')
         self.assertEqual(tool.get_rooms(self.db_path), ['room0'])
+        #with self.assertRaises(Exception) :
+
+
+        #string exception raised dans la def de la fonction sur quick_tools.py
 
     def test_add_multiple_rooms(self):
         tool.add_room(self.db_path,'room0','public')
@@ -46,4 +54,3 @@ class TestQuickToolsMethods(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
