@@ -11,6 +11,7 @@ def get_room(db_path, room_name):
 	rooms = [room[0] for room in rooms]
 
 	return rooms
+
 def get_rooms(db_path):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
@@ -43,6 +44,15 @@ def delete_room(db_path, room_name):
 	sql = 'DELETE FROM Rooms WHERE room_name=?'
 
 	cursor.execute(sql,(room_name,))
+	connect.commit()
+
+def delete_rooms(db_path):
+	connect = sqlite3.connect(db_path)
+	cursor = connect.cursor()
+
+	sql = 'DELETE FROM Rooms'
+
+	cursor.execute(sql)
 	connect.commit()
 
 

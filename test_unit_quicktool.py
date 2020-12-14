@@ -15,6 +15,10 @@ class TestQuickToolsMethods(unittest.TestCase):
         #Suppression de BDD
         tool.delete_db(self.db_path)
 
+    def test_get_room(self):
+        tool.add_room(self.db_path, 'room_get', 'public')
+        self.assertEqual(tool.get_room(self.db_path, 'room_get'), ['room_get'])
+
     def test_get_rooms(self):
         tool.add_room(self.db_path,'room0','public')
         self.assertEqual(tool.get_rooms(self.db_path), ['room0'])
@@ -49,6 +53,11 @@ class TestQuickToolsMethods(unittest.TestCase):
         #print(tool.get_rooms(self.db_path))
         self.assertEqual(tool.get_rooms(self.db_path), ['room1'])
 
+    def test_delete_rooms(self):
+        tool.add_room(self.db_path,'room0','public')
+        tool.add_room(self.db_path,'room1','public')
+        tool.delete_rooms(self.db_path)
+        self.assertEqual(tool.get_rooms(self.db_path), [])
 
     def test_delete_user(self):
         tool.add_user(self.db_path,'yann.c',0,0,'password')
