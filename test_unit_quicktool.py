@@ -85,7 +85,7 @@ class TestQuickToolsMethods(unittest.TestCase):
         tool.delete_rooms(self.db_path)
         self.assertEqual(tool.get_rooms(self.db_path), [])
 
-    def test_delete_room(self):
+    def test_delete_room_2(self):
        tool.add_room(self.db_path, 'room_del', 'public')
        self.assertEqual(tool.get_room(self.db_path, 'room_del'), ['room_del'])
        tool.delete_room(self.db_path, 'room_del')
