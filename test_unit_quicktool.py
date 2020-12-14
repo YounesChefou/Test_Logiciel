@@ -53,31 +53,17 @@ class TestQuickToolsMethods(unittest.TestCase):
         #print(tool.get_rooms(self.db_path))
         self.assertEqual(tool.get_rooms(self.db_path), ['room1'])
 
-<<<<<<< HEAD
     def test_delete_room_2(self):
-=======
-    def test_delete_rooms(self):
-        tool.add_room(self.db_path,'room0','public')
-        tool.add_room(self.db_path,'room1','public')
-        tool.delete_rooms(self.db_path)
-        self.assertEqual(tool.get_rooms(self.db_path), [])
-
-    def test_delete_room(self):
->>>>>>> a737373b391fc0ef78c738dce6a815d899af510c
        tool.add_room(self.db_path, 'room_del', 'public')
        self.assertEqual(tool.get_room(self.db_path, 'room_del'), ['room_del'])
        tool.delete_room(self.db_path, 'room_del')
        self.assertEqual(tool.get_room(self.db_path, 'room_del'), [])
 
-<<<<<<< HEAD
     def test_delete_rooms(self):
         tool.add_room(self.db_path,'room0','public')
         tool.add_room(self.db_path,'room1','public')
         tool.delete_rooms(self.db_path)
         self.assertEqual(tool.get_rooms(self.db_path), [])
-=======
-
->>>>>>> a737373b391fc0ef78c738dce6a815d899af510c
 
     def test_delete_user(self):
         tool.add_user(self.db_path,'yann.c',0,0,'password')
