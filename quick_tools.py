@@ -1,6 +1,9 @@
 import sqlite3
 
 def get_room(db_path, room_name):
+	if (isinstance(room_name, str) == False):
+		raise Exception('room_name doit être sous la forme de string');
+
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
 
@@ -28,6 +31,9 @@ def add_room(db_path, room_name, room_type):
 	if (isinstance(room_name, str) == False):
 		raise Exception('room_name doit être sous la forme de string');
 
+	if (isinstance(room_type, str) == False):
+		raise Exception('room_type doit être sous la forme de string');
+
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
 
@@ -38,6 +44,9 @@ def add_room(db_path, room_name, room_type):
 
 
 def delete_room(db_path, room_name):
+	if (isinstance(room_name, str) == False):
+		raise Exception('room_name doit être sous la forme de string');
+
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
 
@@ -70,6 +79,13 @@ def get_users(db_path):
 
 
 def add_user(db_path, user_name, user_role, user_rights, user_password):
+	if (isinstance(user_name, str) == False):
+		raise Exception('user_name doit être sous la forme de string');
+
+	if (isinstance(user_password, str) == False):
+		raise Exception('user_password doit être sous la forme de string');
+
+
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
 
