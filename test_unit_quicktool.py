@@ -34,8 +34,8 @@ class TestQuickToolsMethods(unittest.TestCase):
         #string exception raised dans la def de la fonction sur quick_tools.py
 
     def test_get_users(self):
-        tool.add_user(self.db_path,'yann.c',0,0,'password')
-        self.assertEqual(tool.get_users(self.db_path), ['yann.c'])
+        tool.add_user(self.db_path,'yann',0,0,'password')
+        self.assertEqual(tool.get_users(self.db_path), ['yann.c'],"user not found")
 
     def test_add_multiple_rooms(self):
         tool.add_room(self.db_path,'room0','public')
@@ -46,6 +46,7 @@ class TestQuickToolsMethods(unittest.TestCase):
         tool.add_user(self.db_path,'yann.c',0,0,'password')
         self.assertEqual(tool.get_users(self.db_path),['yann.c'])
 
+    #DOUBLON
     def test_delete_room(self):
         tool.add_room(self.db_path,'room0','public')
         tool.add_room(self.db_path,'room1','public')
@@ -53,17 +54,19 @@ class TestQuickToolsMethods(unittest.TestCase):
         #print(tool.get_rooms(self.db_path))
         self.assertEqual(tool.get_rooms(self.db_path), ['room1'])
 
-    def test_delete_room_2(self):
-       tool.add_room(self.db_path, 'room_del', 'public')
-       self.assertEqual(tool.get_room(self.db_path, 'room_del'), ['room_del'])
-       tool.delete_room(self.db_path, 'room_del')
-       self.assertEqual(tool.get_room(self.db_path, 'room_del'), [])
-
     def test_delete_rooms(self):
         tool.add_room(self.db_path,'room0','public')
         tool.add_room(self.db_path,'room1','public')
         tool.delete_rooms(self.db_path)
         self.assertEqual(tool.get_rooms(self.db_path), [])
+
+    def test_delete_room(self):
+       tool.add_room(self.db_path, 'room_del', 'public')
+       self.assertEqual(tool.get_room(self.db_path, 'room_del'), ['room_del'])
+       tool.delete_room(self.db_path, 'room_del')
+       self.assertEqual(tool.get_room(self.db_path, 'room_del'), [])
+
+
 
     def test_delete_user(self):
         tool.add_user(self.db_path,'yann.c',0,0,'password')
