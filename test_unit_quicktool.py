@@ -57,7 +57,6 @@ class TestQuickToolsMethods(unittest.TestCase):
         #print(tool.get_users(self.db_path))
         self.assertEqual(tool.get_users(self.db_path), ['bob'])
 
-<<<<<<< HEAD
     def test_delete_room(self):
        tool.add_room(self.db_path, 'room_del', 'public')
        self.assertEqual(tool.get_room(self.db_path, 'room_del'), ['room_del'])
@@ -65,10 +64,8 @@ class TestQuickToolsMethods(unittest.TestCase):
        self.assertEqual(tool.get_room(self.db_path, 'room_del'), [])
 
 
-=======
    # def test_create_db(self):
    # def test_delete_db(self):
->>>>>>> 58a94bdd3b9f24e2919dabfc8a460da84ab28bdc
 
 
 
