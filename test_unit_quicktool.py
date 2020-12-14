@@ -1,4 +1,5 @@
 import unittest
+import sqlite3
 import quick_tools as tool
 
 class TestQuickToolsMethods(unittest.TestCase):
@@ -37,13 +38,19 @@ class TestQuickToolsMethods(unittest.TestCase):
 
     def test_add_user(self):
         tool.add_user(self.db_path,'yann.c',0,0,'password')
-        self.assertEqual(tool.get_users(self.db_path),['yann.c'] )
+        self.assertEqual(tool.get_users(self.db_path),['yann.c'])
 
     # def test_get_rooms(self):
     #
     #     self.assertEqual(tool.get_rooms(db_path), ['room0'])
 
-   # def test_delete_room(self):
+    def test_delete_room(self):
+       tool.add_room(self.db_path, 'room_del', 'public')
+       self.assertEqual(tool.get_room(self.db_path, 'room_del'), ['room_del'])
+       tool.delete_room(self.db_path, 'room_del')
+       self.assertEqual(tool.get_room(self.db_path, 'room_del'), [])
+
+
 
    # def test_delete_user(self):
 

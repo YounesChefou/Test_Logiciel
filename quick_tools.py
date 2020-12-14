@@ -1,5 +1,16 @@
 import sqlite3
 
+def get_room(db_path, room_name):
+	connect = sqlite3.connect(db_path)
+	cursor = connect.cursor()
+
+	sql = 'SELECT room_name FROM Rooms WHERE room_name=?;'
+
+	rooms = cursor.execute(sql,(room_name,))
+
+	rooms = [room[0] for room in rooms]
+
+	return rooms
 def get_rooms(db_path):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
@@ -11,7 +22,6 @@ def get_rooms(db_path):
 	rooms = [room[0] for room in rooms]
 
 	return rooms
-
 
 def add_room(db_path, room_name, room_type):
 	if (isinstance(room_name, str) == False):
