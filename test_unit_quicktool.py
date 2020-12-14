@@ -42,12 +42,19 @@ class TestQuickToolsMethods(unittest.TestCase):
         tool.add_user(self.db_path,'yann.c',0,0,'password')
         self.assertEqual(tool.get_users(self.db_path),['yann.c'])
 
+    #DOUBLON
     def test_delete_room(self):
         tool.add_room(self.db_path,'room0','public')
         tool.add_room(self.db_path,'room1','public')
         tool.delete_room(self.db_path, 'room0')
         #print(tool.get_rooms(self.db_path))
         self.assertEqual(tool.get_rooms(self.db_path), ['room1'])
+
+    def test_delete_room(self):
+       tool.add_room(self.db_path, 'room_del', 'public')
+       self.assertEqual(tool.get_room(self.db_path, 'room_del'), ['room_del'])
+       tool.delete_room(self.db_path, 'room_del')
+       self.assertEqual(tool.get_room(self.db_path, 'room_del'), [])
 
 
     def test_delete_user(self):
@@ -57,15 +64,18 @@ class TestQuickToolsMethods(unittest.TestCase):
         #print(tool.get_users(self.db_path))
         self.assertEqual(tool.get_users(self.db_path), ['bob'])
 
-    def test_delete_room(self):
-       tool.add_room(self.db_path, 'room_del', 'public')
-       self.assertEqual(tool.get_room(self.db_path, 'room_del'), ['room_del'])
-       tool.delete_room(self.db_path, 'room_del')
-       self.assertEqual(tool.get_room(self.db_path, 'room_del'), [])
 
+    def test_create_db(self):
+        #Sélectionne toutes les tables existantes d'une base de données https://www.ipgirl.com/702/comment-puis-je-verifier-dans-sqlite-si-une-table-existe.html
+        sql = "SELECT name FROM sqlite_master WHERE type='table'"
+        #print(self.cursor.execute(sql).fetchall())
+        self.assertEqual(self.cursor.execute(sql).fetchall(), [('Rooms',), ('Users',)])
 
-   # def test_create_db(self):
-   # def test_delete_db(self):
+    def test_delete_db(self):
+        tool.delete_db(self.db_path)
+        sql = "SELECT name FROM sqlite_master WHERE type='table'"
+        #print(self.cursor.execute(sql).fetchall())
+        self.assertEqual(self.cursor.execute(sql).fetchall(), [])
 
 
 
