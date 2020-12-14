@@ -34,12 +34,19 @@ class TestQuickToolsMethods(unittest.TestCase):
         # https://ongspxm.gitlab.io/blog/2016/11/assertraises-testing-for-errors-in-unittest/
         # ici ça peut etre utile de verifier que les arguments passés sont bien des string
         tool.add_room(self.db_path,'room0','public')
-        tool.add_room(self.db_path,0,'public')
+        with self.assertRaises(Exception) as context:
+            tool.add_room(self.db_path,0,'public')
+            self.assertTrue('room_name doit être sous la forme de string' in context.exception)
+
         self.assertEqual(tool.get_rooms(self.db_path), ['room0'])
-        # with self.assertRaises(Exception) :
-        # string exception raised dans la def de la fonction sur quick_tools.py
+        # # with self.assertRaises(Exception) :
+        # # string exception raised dans la def de la fonction sur quick_tools.py
 
     def test_get_users(self):
+        tool.add_user(self.db_path,'yann',0,0,'password')
+        self.assertEqual(tool.get_users(self.db_path), ['yann'],"user not found")
+
+    def test_get_users_KO(self):
         tool.add_user(self.db_path,'yann',0,0,'password')
         self.assertEqual(tool.get_users(self.db_path), ['yann.c'],"user not found")
 
@@ -53,11 +60,16 @@ class TestQuickToolsMethods(unittest.TestCase):
         self.assertEqual(tool.get_users(self.db_path),['yann.c'])
 
     def test_add_user_KO_1(self):
-        tool.add_user(self.db_path, 15, 0, 0,'password')
+        with self.assertRaises(Exception) as context:
+            tool.add_user(self.db_path, 15, 0, 0,'password')
+            self.assertTrue('user_name doit être sous la forme de string' in context.exception)
         # self.assertEqual(tool.get_users(self.db_path),['yann.c'])
 
     def test_add_user_KO_2(self):
-        tool.add_user(self.db_path, 'yann.c', 0, 0, 30)
+        with self.assertRaises(Exception) as context:
+            tool.add_user(self.db_path, 'yann.c', 0, 0, 30)
+            self.assertTrue('user_password doit être sous la forme de string' in context.exception)
+
         # self.assertEqual(tool.get_users(self.db_path),['yann.c'])
 
     def test_delete_room(self):
