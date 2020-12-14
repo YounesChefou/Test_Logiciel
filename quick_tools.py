@@ -90,14 +90,14 @@ def delete_db(db_path):
 
 #Db creation :
 
-#db_path = 'quick_chat.db'
-
-#create_db(db_path)
-
-#add_user('quick_chat.db','yann.c',0,0,'password')
-#add_room('quick_chat.db','room0','public')
-
-#print(get_users(db_path))
-#print(get_rooms(db_path))
-#delete_user(db_path,'yann.c')
-#print(get_users(db_path))
+# db_path = 'quick_chat.db'
+#
+# create_db(db_path)
+#
+# add_user('quick_chat.db','yann.c',0,0,'password')
+# add_room('quick_chat.db','room0','public')
+#
+# print(get_users(db_path))
+# print(get_rooms(db_path))
+# delete_user(db_path,'yann.c')
+# print(get_users(db_path))
